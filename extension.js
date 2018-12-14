@@ -12,7 +12,7 @@
         // Make an AJAX call to the MathJS API
 		$.ajax({
 			//http://api.mathjs.org/v4/?expr=2*(7-3)
-			url: 'http://api.mathjs.org/v4?expr='+formula,
+			url: 'http://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
 			method: "GET",
 			dataType: 'text'
             })
@@ -30,7 +30,7 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['R', 'formula to execute %s', 'get_output', '1+1'],
+            ['R', 'formula => %s', 'get_output', '1+1'],
         ]
     };
 
