@@ -35,5 +35,5 @@
     };
 
     // Register the extension
-    ScratchExtensions.register('Mathematical extension', descriptor, ext);
+    ScratchExtensions.register('MathJS', descriptor, ext);
 })({});
