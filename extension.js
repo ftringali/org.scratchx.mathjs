@@ -10,18 +10,23 @@
 
     ext.get_output = function(formula, callback) {
         // Make an AJAX call to the MathJS API
-        $.ajax({
-			  //http://api.mathjs.org/v4/?expr=2*(7-3)
-              url: 'http://api.mathjs.org/v4/?expr='+formula,
-              dataType: 'jsonp',
-              success: function( data ) {
-                  // Got the data - parse it and return the output
-                  output = data;
-                  callback(output);
-              }
+		$.ajax({
+			//http://api.mathjs.org/v4/?expr=2*(7-3)
+			url: 'http://api.mathjs.org/v4?expr='+formula,
+			method: "GET",
+			dataType: 'text'
+            })
+            .done (function( data ) {
+				// Got the data - parse it and return the output
+                output = data;
+                callback(output);
+            })
+            .fail(function(e){
+                output = e.responseText;
+				callback(output);
         });
     };
-
+	
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
