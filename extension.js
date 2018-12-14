@@ -8,15 +8,16 @@
         return {status: 2, msg: 'Ready'};
     };
 
-    ext.get_temp = function(location, callback) {
-        // Make an AJAX call to the Open Weather Maps API
+    ext.get_output = function(formula, callback) {
+        // Make an AJAX call to the MathJS API
         $.ajax({
-              url: 'http://api.openweathermap.org/data/2.5/weather?q='+location+'&units=imperial',
+			  //http://api.mathjs.org/v4/?expr=2*(7-3)
+              url: 'http://api.mathjs.org/v4/?expr='+formula,
               dataType: 'jsonp',
-              success: function( weather_data ) {
-                  // Got the data - parse it and return the temperature
-                  temperature = weather_data['main']['temp'];
-                  callback(temperature);
+              success: function( data ) {
+                  // Got the data - parse it and return the output
+                  output = data;
+                  callback(output);
               }
         });
     };
@@ -24,10 +25,10 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['R', 'current temperature in city %s', 'get_temp', 'Boston, MA'],
+            ['R', 'formula to execute %s', 'get_output', '1+1'],
         ]
     };
 
     // Register the extension
-    ScratchExtensions.register('Weather extension', descriptor, ext);
+    ScratchExtensions.register('Mathematical extension', descriptor, ext);
 })({});
