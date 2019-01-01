@@ -8,26 +8,55 @@
         return {status: 2, msg: 'Ready'};
     };
 
-    ext.get_temp = function(location, callback) {
-        // Make an AJAX call to the Open Weather Maps API
-        $.ajax({
-              url: 'http://api.openweathermap.org/data/2.5/weather?q='+location+'&units=imperial',
-              dataType: 'jsonp',
-              success: function( weather_data ) {
-                  // Got the data - parse it and return the temperature
-                  temperature = weather_data['main']['temp'];
-                  callback(temperature);
-              }
+    ext.get_output = function(formula, callback) {
+        // Make an AJAX call to the MathJS API
+		$.ajax({
+			//http://api.mathjs.org/v4/?expr=2*(7-3)
+			url: 'http://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
+			method: "GET",
+			dataType: 'text'
+            })
+            .done (function( data ) {
+				// Got the data - parse it and return the output
+                output = data;
+                callback(output);
+            })
+            .fail(function(e){
+                output = e.responseText;
+				callback(output);
         });
     };
 
+    ext.get_function_output = function(formula, callback) {
+		$.ajax({
+			url: 'http://api.mathjs.org/v4/',
+			method: "POST",
+			dataType: 'jsonp',
+			expr: [
+			  formula.func,
+			  formula.val
+			],
+			precision : 0
+            })
+            .done (function( data ) {
+				// Got the data - parse it and return the output
+                output = data.result;
+                callback(output);
+            })
+            .fail(function(e){
+                output = e.responseText;
+				callback(output);
+        });
+    };
+	
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['R', 'current temperature in city %s', 'get_temp', 'Boston, MA'],
+            ['R', 'formula => %s', 'get_output', '1+1'],
+            ['R', 'function ( %s ) for value %n', 'get_function_output', '2x', 1],
         ]
     };
 
     // Register the extension
-    ScratchExtensions.register('Weather extension', descriptor, ext);
+    ScratchExtensions.register('MathJS', descriptor, ext);
 })({});
