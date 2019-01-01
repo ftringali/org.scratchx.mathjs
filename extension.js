@@ -27,14 +27,14 @@
         });
     };
 
-    ext.get_function_output = function(formula, callback) {
+    ext.get_function_output = function(func, val, callback) {
 		$.ajax({
 			url: 'http://api.mathjs.org/v4/',
 			method: "POST",
 			dataType: 'jsonp',
 			expr: [
-			  formula.func,
-			  formula.val
+			  func,
+			  val
 			],
 			precision : 0
             })
