@@ -39,8 +39,7 @@
 			precision : 0
             })
             .done (function( data ) {
-				// Got the data - parse it and return the output
-                output = data.result;
+                output = data['result'][1];
                 callback(output);
             })
             .fail(function(e){
