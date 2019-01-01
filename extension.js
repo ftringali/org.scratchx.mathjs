@@ -26,11 +26,34 @@
 				callback(output);
         });
     };
+
+    ext.get_function_output = function(formula, callback) {
+		$.ajax({
+			url: 'http://api.mathjs.org/v4/',
+			method: "POST",
+			dataType: 'jsonp',
+			expr: [
+			  formula.func,
+			  formula.val
+			],
+			precision : 0
+            })
+            .done (function( data ) {
+				// Got the data - parse it and return the output
+                output = data.result;
+                callback(output);
+            })
+            .fail(function(e){
+                output = e.responseText;
+				callback(output);
+        });
+    };
 	
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
             ['R', 'formula => %s', 'get_output', '1+1'],
+            ['R', 'function ( %s ) for value %n', 'get_function_output', '2x', 1],
         ]
     };
 
