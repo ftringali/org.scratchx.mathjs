@@ -27,6 +27,23 @@
         });
     };
 
+    ext.get_function_x_output = function(func, val, callback) {
+		$.ajax({
+			var formula = func.replace("x", val);
+			url: 'http://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
+			method: 'GET',
+			dataType: 'text'
+            })
+            .done (function( data ) {
+                output = data;
+                callback(output);
+            })
+            .fail(function(e){
+                output = e.responseText;
+				callback(output);
+        });
+    };
+
     ext.get_function_output = function(func, val, callback) {
 		$.ajax({
 			url: 'http://api.mathjs.org/v4/',
@@ -57,6 +74,7 @@
         blocks: [
             ['R', 'formula => %s', 'get_output', '1+1'],
             ['R', 'function ( %s ) for value %s', 'get_function_output', '2x', '3'],
+            ['R', 'function X ( %s ) for value %n', 'get_function_x_output', '2x', 3],
         ]
     };
 
