@@ -27,8 +27,12 @@
         });
     };
 
+	function replaceAll(str, find, replace) {
+		return str.replace(new RegExp(find, 'g'), replace);
+	}
+
     ext.get_function_x_output = function(func, val, callback) {
-		var formula = func.replace("x", "(1*"+val+")");
+		var formula = replaceAll(func, "x", "(1*"+val+")");
 		$.ajax({
 			url: 'http://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
 			method: 'GET',
@@ -79,8 +83,8 @@
     var descriptor = {
         blocks: [
             ['R', 'formula => %s', 'get_output', '1+1'],
-            ['R', 'function ( %s ) for value %s', 'get_function_output', '2x', '3'],
-            ['R', 'function X ( %s ) for value %n', 'get_function_x_output', '2x', 3],
+            ['R', 'f( %s ), val => %s', 'get_function_output', '2x', '3'],
+            ['R', 'f(x) = ( %s ) => %n', 'get_function_x_output', '2x', 3],
         ]
     };
 
