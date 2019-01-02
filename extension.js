@@ -33,14 +33,15 @@
 			method: "POST",
 			dataType: 'jsonp',
 			expr: [
-			  func,
-			  val
+			  "f("+func+")",
+			  "f("+val+")"
 			],
 			precision : 0
             })
             .done (function( data ) {
                 output = data['result'][1];
-                callback(output);
+                output = output + " (" + data['error'] + ")"
+				callback(output);
             })
             .fail(function(e){
                 output = e.responseText;
@@ -52,7 +53,7 @@
     var descriptor = {
         blocks: [
             ['R', 'formula => %s', 'get_output', '1+1'],
-            ['R', 'function ( %s ) for value %n', 'get_function_output', '2x', 1],
+            ['R', 'function ( %s ) for value %s', 'get_function_output', '2x', '1'],
         ]
     };
 
