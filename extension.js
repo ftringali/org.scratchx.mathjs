@@ -32,6 +32,7 @@
 			url: 'http://api.mathjs.org/v4/',
 			method: 'POST',
 			dataType: 'json',
+			contentType: "application/json; charset=utf-8",
 			data: {
 				precision: 0,
 				expr: [
@@ -39,12 +40,14 @@
 					'"f('+val+')"'
 				]
 			}
-		}).done(function(data, textStatus, jqxhr) {
-			output = data['result'][1];
-			output = output + " (" + data['error'] + ")"
+		}).done(function(data) {
+			sdata = JSON.stringify(data);
+			output = sdata;
+			//output = data['result'][1];
+			//output = output + " (" + data['error'] + ")"
 			callback(output);
-		}).fail(function(jqxhr, textStatus, errorThrown) {
-			output = errorThrown.responseText;
+		}).fail(function(jqXHR, textStatus) {
+			output = textStatus;
 			callback(output);
 		});
     };
