@@ -28,7 +28,7 @@
     };
 
     ext.get_function_x_output = function(func, val, callback) {
-		var formula = func.replace("x", val);
+		var formula = func.replace("x", "(1*"+val+")");
 		$.ajax({
 			url: 'http://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
 			method: 'GET',
