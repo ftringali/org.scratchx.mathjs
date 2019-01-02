@@ -28,8 +28,8 @@
     };
 
     ext.get_function_x_output = function(func, val, callback) {
+		var formula = func.replace("x", val);
 		$.ajax({
-			var formula = func.replace("x", val);
 			url: 'http://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
 			method: 'GET',
 			dataType: 'text'
