@@ -30,11 +30,11 @@
     ext.get_function_output = function(func, val, callback) {
 		$.ajax({
 			url: 'http://api.mathjs.org/v4/',
-			method: "POST",
+			method: 'POST',
 			dataType: 'jsonp',
 			expr: [
-			  "f("+func+")",
-			  "f("+val+")"
+			  '"f(x) = '+func+'"',
+			  '"f('+val+')"'
 			],
 			precision : 0
             })
@@ -53,7 +53,7 @@
     var descriptor = {
         blocks: [
             ['R', 'formula => %s', 'get_output', '1+1'],
-            ['R', 'function ( %s ) for value %s', 'get_function_output', '2x', '1'],
+            ['R', 'function ( %s ) for value %s', 'get_function_output', '2x', '3'],
         ]
     };
 
