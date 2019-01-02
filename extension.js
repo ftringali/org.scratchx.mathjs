@@ -56,7 +56,8 @@
 					'"f(x) = '+func+'"',
 					'"f('+val+')"'
 				]
-			}
+			},
+			beforeSend: setHeader
 		}).done(function(data) {
 			sdata = JSON.stringify(data);
 			output = sdata;
@@ -68,6 +69,11 @@
 			callback(output);
 		});
     };
+	
+	function setHeader(xhr) {
+	  xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+	  xhr.setRequestHeader("Access-Control-Allow-Headers","*");
+	}
 	
     // Block and block menu descriptions
     var descriptor = {
