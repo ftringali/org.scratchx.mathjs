@@ -13,7 +13,7 @@
 		$.ajax({
 			//http://api.mathjs.org/v4/?expr=2*(7-3)
 			url: 'http://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
-			method: "GET",
+			method: 'GET',
 			dataType: 'text'
             })
             .done (function( data ) {
@@ -31,22 +31,22 @@
 		$.ajax({
 			url: 'http://api.mathjs.org/v4/',
 			method: 'POST',
-			dataType: 'jsonp',
-			expr: [
-			  '"f(x) = '+func+'"',
-			  '"f('+val+')"'
-			],
-			precision : 0
-            })
-            .done (function( data ) {
-                output = data['result'][1];
-                output = output + " (" + data['error'] + ")"
-				callback(output);
-            })
-            .fail(function(e){
-                output = e.responseText;
-				callback(output);
-        });
+			dataType: 'json',
+			data: {
+				precision: 0,
+				expr: [
+					'"f(x) = '+func+'"',
+					'"f('+val+')"'
+				]
+			}
+		}).done(function(data, textStatus, jqxhr) {
+			output = data['result'][1];
+			output = output + " (" + data['error'] + ")"
+			callback(output);
+		}).fail(function(jqxhr, textStatus, errorThrown) {
+			output = errorThrown.responseText;
+			callback(output);
+		});
     };
 	
     // Block and block menu descriptions
