@@ -72,7 +72,7 @@
 	
 	function setHeader(xhr) {
 	  xhr.setRequestHeader("Access-Control-Allow-Origin","*");
-	  xhr.setRequestHeader("Access-Control-Allow-Headers","*");
+	  xhr.setRequestHeader("Access-Control-Allow-Headers","Content-Type, X-Requested-With");
 	}
 	
     // Block and block menu descriptions
