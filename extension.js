@@ -98,7 +98,7 @@
             ['R', 'formula => %s', 'get_output', '1+1'],
             ['R', 'f( %s ), val => %s', 'get_function_output', '2x', '3'],
             ['R', 'f(x) = ( %s ) => %n', 'get_function_x_output', '2x', 3],
-			['w', 'speak %s', 'speak_text', 'Ciao!', 'it-IT'],
+			['w', 'speak %s in %s', 'speak_text', 'Ciao!', 'it-IT'],
         ]
     };
 
