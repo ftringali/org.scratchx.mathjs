@@ -12,7 +12,7 @@
         // Make an AJAX call to the MathJS API
 		$.ajax({
 			//http://api.mathjs.org/v4/?expr=2*(7-3)
-			url: 'http://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
+			url: 'https://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
 			method: 'GET',
 			dataType: 'text'
             })
@@ -34,7 +34,7 @@
     ext.get_function_x_output = function(func, val, callback) {
 		var formula = replaceAll(func, "x", "(1*"+val+")");
 		$.ajax({
-			url: 'http://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
+			url: 'https://api.mathjs.org/v4?expr='+encodeURIComponent(formula),
 			method: 'GET',
 			dataType: 'text'
             })
@@ -50,7 +50,7 @@
 
     ext.get_function_output = function(func, val, callback) {
 		$.ajax({
-			url: 'http://api.mathjs.org/v4/',
+			url: 'https://api.mathjs.org/v4/',
 			method: 'POST',
 			dataType: 'json',
 			contentType: "application/json; charset=utf-8",
