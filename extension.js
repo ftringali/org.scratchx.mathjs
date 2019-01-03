@@ -82,14 +82,14 @@
 	//thanks to https://sayamindu.github.io/scratch-extensions/text-to-speech/text_to_speech_extension.js
 	ext.speak_text = function (text, lang, callback) {
 		var synth = window.speechSynthesis;
-        var u = new SpeechSynthesisUtterance(text.toString());
+		var u = new SpeechSynthesisUtterance(text.toString());
 		u.lang = lang;
-        u.onend = function(event) {
-            if (typeof callback=="function") callback();
-        };
-        
-        synth.speak(u);
-    };
+		u.onend = function(event) {
+			if (typeof callback=="function") callback();
+		};
+		
+		synth.speak(u);
+	};
 
 	
     // Block and block menu descriptions
