@@ -79,12 +79,26 @@
 	  xhr.setRequestHeader("Access-Control-Allow-Headers","Content-Type, X-Requested-With");
 	}
 	
+	//thanks to https://sayamindu.github.io/scratch-extensions/text-to-speech/text_to_speech_extension.js
+	ext.speak_text = function (text, lang, callback) {
+		var synth = window.speechSynthesis;
+        var u = new SpeechSynthesisUtterance(text.toString());
+		u.lang = lang;
+        u.onend = function(event) {
+            if (typeof callback=="function") callback();
+        };
+        
+        synth.speak(u);
+    };
+
+	
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
             ['R', 'formula => %s', 'get_output', '1+1'],
             ['R', 'f( %s ), val => %s', 'get_function_output', '2x', '3'],
             ['R', 'f(x) = ( %s ) => %n', 'get_function_x_output', '2x', 3],
+			['w', 'speak %s', 'speak_text', 'Ciao!', 'it-IT'],
         ]
     };
 
